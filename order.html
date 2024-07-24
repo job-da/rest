@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваш заказ</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div>
+        <h1 class="head-text">Ваш заказ</h1>
+        <div id="order-container"></div>
+        <script>
+            function displayOrders(orders) {
+                const orderContainer = document.getElementById('order-container');
+                if (orders.length === 0) {
+                    orderContainer.innerHTML = '<p class="no-product">Ваш заказ отсутствует.</p>';
+                    return;
+                }
+                let html = '<ul class="no-product">';
+                orders.forEach((order, index) => {
+                    const status = order.status || "не готово";
+                    const statusClass = status === "готово" ? "ready" : "not-ready";
+                    order.items.forEach(item => {
+                        html += `<li class="order-product">${item.name}: ${item.quantity}</li>`;
+                    });
+                    html += `</ul>
+                        <div class="order-status">Статус заказа: <span class="status ${statusClass}">${status}</span></div>
+                    </li>`;
+                });
+                html += '</ul>';
+                orderContainer.innerHTML = html;
+            }
+
+            function loadOrders() {
+                const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                displayOrders(orders);
+            }
+
+            document.addEventListener('DOMContentLoaded', loadOrders);
+
+            window.addEventListener('storage', function(event) {
+                if (event.key === 'orders') {
+                    loadOrders();
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>

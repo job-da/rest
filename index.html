@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>123</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <h1 class="index-head-text">Добро пожаловать в "Название"!</h1>
+    <h1 class="head-menu">Меню</h1>
+    <div class="container">
+        <div class="rectangle" data-price="100" id="product-1">
+            <h2 class="product-name">Бургер1</h2>
+            <img class="product" src="img/burger.png" width="150" height="150">
+            <h3 class="product-info">Цена: 100</h3>
+            <div class="center-container">
+                <input type="button" class="product-add_button" value="Добавить" onclick="toggleQuantity(this)">
+                <div class="quantity-container">
+                    <button class="quantity-button" onclick="decreaseQuantity(this)">-</button>
+                    <span class="quantity">0</span>
+                    <button class="quantity-button" onclick="increaseQuantity(this)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="rectangle" data-price="200" id="product-2">
+            <h2 class="product-name">Бургер2</h2>
+            <img class="product" src="img/burger.png" width="150" height="150">
+            <h3 class="product-info">Цена: 200</h3>
+            <div class="center-container">
+                <input type="button" class="product-add_button" value="Добавить" onclick="toggleQuantity(this)">
+                <div class="quantity-container">
+                    <button class="quantity-button" onclick="decreaseQuantity(this)">-</button>
+                    <span class="quantity">0</span>
+                    <button class="quantity-button" onclick="increaseQuantity(this)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="rectangle" data-price="300" id="product-3">
+            <h2 class="product-name">Бургер3</h2>
+            <img class="product" src="img/burger.png" width="150" height="150">
+            <h3 class="product-info">Цена: 300</h3>
+            <div class="center-container">
+                <input type="button" class="product-add_button" value="Добавить" onclick="toggleQuantity(this)">
+                <div class="quantity-container">
+                    <button class="quantity-button" onclick="decreaseQuantity(this)">-</button>
+                    <span class="quantity">0</span>
+                    <button class="quantity-button" onclick="increaseQuantity(this)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="rectangle" data-price="100" id="product-4">
+            <h2 class="product-name">Кофе</h2>
+            <img class="product-2" src="img/coffee.png" width="220" height="150">
+            <h3 class="product-info">Цена: 100</h3>
+            <div class="center-container">
+                <input type="button" class="product-add_button" value="Добавить" onclick="toggleQuantity(this)">
+                <div class="quantity-container">
+                    <button class="quantity-button" onclick="decreaseQuantity(this)">-</button>
+                    <span class="quantity">0</span>
+                    <button class="quantity-button" onclick="increaseQuantity(this)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="rectangle" data-price="200" id="product-5">
+            <h2 class="product-name">Кофе2</h2>
+            <img class="product-2" src="img/coffee.png" width="220" height="150">
+            <h3 class="product-info">Цена: 200</h3>
+            <div class="center-container">
+                <input type="button" class="product-add_button" value="Добавить" onclick="toggleQuantity(this)">
+                <div class="quantity-container">
+                    <button class="quantity-button" onclick="decreaseQuantity(this)">-</button>
+                    <span class="quantity">0</span>
+                    <button class="quantity-button" onclick="increaseQuantity(this)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="rectangle" data-price="300" id="product-6">
+            <h2 class="product-name">Кофе3</h2>
+            <img class="product-2" src="img/coffee.png" width="220" height="150">
+            <h3 class="product-info">Цена: 300</h3>
+            <div class="center-container">
+                <input type="button" class="product-add_button" value="Добавить" onclick="toggleQuantity(this)">
+                <div class="quantity-container">
+                    <button class="quantity-button" onclick="decreaseQuantity(this)">-</button>
+                    <span class="quantity">0</span>
+                    <button class="quantity-button" onclick="increaseQuantity(this)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="order-container">
+            <input type="text" id="customer-name" placeholder="Ваше имя" class="name-input">
+            <input type="button" id="order-button" class="product-order_button" value="Заказать">
+        </div>
+        <span class="total-price">Общая сумма: 0</span>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+</html>
