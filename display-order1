@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказы</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <h1 class="head-text">Заказы</h1>
+    <div id="orders-container"></div>
+    <audio id="notification-sound" src="static/notification.mp3" preload="auto"></audio>
+    <script>
+        const audio = document.getElementById('notification-sound');
+
+        function displayOrders(orders) {
+            const ordersContainer = document.getElementById('orders-container');
+            if (orders.length === 0) {
+                ordersContainer.innerHTML = '<p class="no-product">Заказов нет.</p>';
+                return;
+            }
+            ordersContainer.innerHTML = '';
+            orders.forEach((order, index) => {
+                const orderDiv = document.createElement('div');
+                orderDiv.className = 'order display-order-product';
+
+                const customerName = document.createElement('h3');
+                customerName.textContent = `Имя клиента: ${order.customerName}`;
+                orderDiv.appendChild(customerName);
+
+                const orderList = document.createElement('ul');
+                order.items.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${item.name}: ${item.quantity} шт.`;
+                    orderList.appendChild(listItem);
+                });
+
+                const status = document.createElement('span');
+                status.className = order.status === 'готово' ? 'display-order-status-ready' : 'display-order-status-no-ready';
+                status.textContent = order.status;
+
+                const readyButton = document.createElement('button');
+                readyButton.className = 'display-order-ready';
+                readyButton.textContent = 'готово';
+                readyButton.onclick = () => setOrderReady(index);
+
+                const removeButton = document.createElement('button');
+                removeButton.className = 'display-order-remove';
+                removeButton.textContent = 'удалить';
+                removeButton.onclick = () => removeOrder(index);
+
+                orderDiv.appendChild(orderList);
+                orderDiv.appendChild(status);
+                orderDiv.appendChild(readyButton);
+                orderDiv.appendChild(removeButton);
+                ordersContainer.appendChild(orderDiv);
+            });
+        }
+
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            displayOrders(orders);
+        }
+
+        function setOrderReady(index) {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            if (orders[index]) {
+                orders[index].status = "готово";
+                localStorage.setItem('orders', JSON.stringify(orders));
+                displayOrders(orders);
+            }
+        }
+
+        function removeOrder(index) {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            if (orders[index]) {
+                orders.splice(index, 1);
+                localStorage.setItem('orders', JSON.stringify(orders));
+                displayOrders(orders);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadOrders);
+
+        window.addEventListener('storage', function(event) {
+            if (event.key === 'orders') {
+                loadOrders();
+                audio.play();
+            }
+        });
+    </script>
+</body>
+</html>
